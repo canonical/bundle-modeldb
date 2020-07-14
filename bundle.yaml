@@ -1,0 +1,33 @@
+bundle: kubernetes
+applications:
+  modeldb-backend:
+    charm: cs:~kubeflow-charmers/modeldb-backend
+    source: ./charms/modeldb-backend
+    scale: 1
+    annotations:
+      gui-x: '0'
+      gui-y: '-518'
+  modeldb-db:
+    charm: cs:~charmed-osm/mariadb-k8s
+    scale: 1
+    annotations:
+      gui-x: '300'
+      gui-y: '-518'
+  modeldb-store:
+    charm: cs:~kubeflow-charmers/modeldb-store
+    source: ./charms/modeldb-store
+    scale: 1
+    annotations:
+      gui-x: '-150'
+      gui-y: '-777'
+  modeldb-ui:
+    charm: cs:~kubeflow-charmers/modeldb-ui
+    source: ./charms/modeldb-ui
+    scale: 1
+    annotations:
+      gui-x: '150'
+      gui-y: '-777'
+relations:
+- [modeldb-backend, modeldb-db]
+- [modeldb-backend, modeldb-store]
+- [modeldb-backend, modeldb-ui]
